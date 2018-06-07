@@ -24,7 +24,13 @@ void MainWindow::on_zipDirectoryButton_clicked()
     QString dir = QFileDialog::getExistingDirectory(this, "Select directory", "/home/dmitry/a/",
                                                     QFileDialog::ShowDirsOnly |
                                                     QFileDialog::DontResolveSymlinks);
+    if (dir.isEmpty())
+        return;
+
     QString output = QFileDialog::getSaveFileName(this, "Save zip as", "/home/dmitry/output.zip");
+    if (output.isEmpty())
+        return;
+
     ZipDir zipDir(dir, output);
     zipDir.execute();
 }
